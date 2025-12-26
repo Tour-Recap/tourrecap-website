@@ -15,20 +15,28 @@ export default function Header() {
         <Link href="/" className="text-xl font-bold text-primary">
           TourRecap
         </Link>
-        <nav>
-          <ul className="flex gap-6">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className="text-sm text-gray-600 transition-colors hover:text-primary"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+        <div className="flex items-center gap-6">
+          <nav className="hidden md:block">
+            <ul className="flex gap-6">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-gray-600 transition-colors hover:text-primary"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <Link
+            href="/enterprise"
+            className="hidden md:inline-block rounded-md bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary/90"
+          >
+            Request an Enterprise Pilot
+          </Link>
+        </div>
       </div>
     </header>
   );
