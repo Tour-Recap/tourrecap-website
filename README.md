@@ -23,6 +23,16 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
+## Environment Variables
+
+Create a `.env.local` file for local development:
+
+```bash
+NEXT_PUBLIC_FORMSPREE_ID=xxxxxx
+```
+
+Get your Formspree ID from [formspree.io](https://formspree.io).
+
 ## Scripts
 
 | Command                | Description               |
