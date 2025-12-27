@@ -74,37 +74,46 @@ Setup:
 
 ```bash
 gcloud auth login
-gcloud config set project YOUR_PROJECT_ID
+gcloud config set project tourrecap-web-dev
 ```
 
 ### Deploy
 
-```bash
-gcloud run deploy tourrecap-website --source . --region us-central1 --min-instances 0 --max-instances 3 --cpu 1 --memory 512Mi --concurrency 80 --timeout 60s --cpu-throttling --allow-unauthenticated
-```
-
-To set environment variables at deploy time:
+Using the deploy script:
 
 ```bash
-gcloud run deploy tourrecap-website --source . --region us-central1 --min-instances 0 --max-instances 3 --cpu 1 --memory 512Mi --concurrency 80 --timeout 60s --cpu-throttling --allow-unauthenticated --set-env-vars "NEXT_PUBLIC_FORMSPREE_ID=xxx,NEXT_PUBLIC_BASIC_DEMO_CALENDLY_URL=xxx"
+chmod +x ops/deploy_web_dev.sh
+./ops/deploy_web_dev.sh
 ```
 
-**Note:** Environment variables are optional. If not set, the site will run with placeholder content where those features are used.
+Or manually:
+
+```bash
+gcloud run deploy tourrecap-website --source . --region us-east1 --allow-unauthenticated --min-instances=0 --max-instances=3 --cpu=1 --memory=512Mi --concurrency=80 --timeout=60s --cpu-throttling
+```
+
+To set environment variables at deploy time, add:
+
+```bash
+--set-env-vars "NEXT_PUBLIC_FORMSPREE_ID=xxx,NEXT_PUBLIC_BASIC_DEMO_CALENDLY_URL=xxx"
+```
+
+**Note:** Environment variables are optional. If not set, the site will run with placeholder content.
 
 ### Smoke Test
 
 ```bash
-curl -I $(gcloud run services describe tourrecap-website --region us-central1 --format='value(status.url)')
+curl -I $(gcloud run services describe tourrecap-website --region us-east1 --format='value(status.url)')
 ```
 
 ### View Logs
 
 ```bash
-gcloud run services logs read tourrecap-website --region us-central1
+gcloud run services logs read tourrecap-website --region us-east1
 ```
 
 ### Delete Service (stop all costs)
 
 ```bash
-gcloud run services delete tourrecap-website --region us-central1
+gcloud run services delete tourrecap-website --region us-east1
 ```

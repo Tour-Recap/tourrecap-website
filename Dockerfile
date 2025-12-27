@@ -16,6 +16,10 @@ FROM node:20-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 
+# Create non-root user
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 nextjs
+
 # Copy package files and install prod dependencies only
 COPY package*.json ./
 RUN npm ci --omit=dev
@@ -23,7 +27,11 @@ RUN npm ci --omit=dev
 # Copy built assets and config
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public ./public
-COPY --from=builder /app/next.config.ts ./
+COPY --from=builder /app/next.config.js ./
+
+# Set ownership and switch to non-root user
+RUN chown -R nextjs:nodejs /app
+USER nextjs
 
 # Cloud Run sets PORT env var
 EXPOSE 3000
