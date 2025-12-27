@@ -29,7 +29,19 @@ Create a `.env.local` file for local development:
 
 ```bash
 NEXT_PUBLIC_FORMSPREE_ID=xxxxxx
+NEXT_PUBLIC_BASIC_DEMO_CALENDLY_URL=https://calendly.com/tourrecap/basic-demo
+NEXT_PUBLIC_SAMPLE_GUEST_URL=https://www.youtube.com/embed/xxxxx
+NEXT_PUBLIC_SAMPLE_TOUR_URL=https://www.youtube.com/embed/xxxxx
+NEXT_PUBLIC_SAMPLE_SEQUENCE_URL=https://www.youtube.com/embed/xxxxx
 ```
+
+| Variable                              | Description                                      |
+| ------------------------------------- | ------------------------------------------------ |
+| `NEXT_PUBLIC_FORMSPREE_ID`            | Formspree form ID for enterprise pilot requests  |
+| `NEXT_PUBLIC_BASIC_DEMO_CALENDLY_URL` | Calendly scheduling URL for basic demo bookings  |
+| `NEXT_PUBLIC_SAMPLE_GUEST_URL`        | Video URL for Guest Daily Recap sample           |
+| `NEXT_PUBLIC_SAMPLE_TOUR_URL`         | Video URL for Tour Day Recap sample              |
+| `NEXT_PUBLIC_SAMPLE_SEQUENCE_URL`     | Video URL for multi-day sequence sample (optional) |
 
 Get your Formspree ID from [formspree.io](https://formspree.io).
 
