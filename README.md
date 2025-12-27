@@ -62,3 +62,49 @@ Get your Formspree ID from [formspree.io](https://formspree.io).
 - [TypeScript](https://www.typescriptlang.org/) - Type safety
 - [Tailwind CSS 4](https://tailwindcss.com/) - Styling
 - [ESLint](https://eslint.org/) + [Prettier](https://prettier.io/) - Linting and formatting
+
+## Deployment (Google Cloud Run)
+
+### Prerequisites
+
+- [Google Cloud CLI](https://cloud.google.com/sdk/docs/install) installed and authenticated
+- A GCP project with billing enabled
+
+Setup:
+
+```bash
+gcloud auth login
+gcloud config set project YOUR_PROJECT_ID
+```
+
+### Deploy
+
+```bash
+gcloud run deploy tourrecap-website --source . --region us-central1 --min-instances 0 --max-instances 3 --cpu 1 --memory 512Mi --concurrency 80 --timeout 60s --cpu-throttling --allow-unauthenticated
+```
+
+To set environment variables at deploy time:
+
+```bash
+gcloud run deploy tourrecap-website --source . --region us-central1 --min-instances 0 --max-instances 3 --cpu 1 --memory 512Mi --concurrency 80 --timeout 60s --cpu-throttling --allow-unauthenticated --set-env-vars "NEXT_PUBLIC_FORMSPREE_ID=xxx,NEXT_PUBLIC_BASIC_DEMO_CALENDLY_URL=xxx"
+```
+
+**Note:** Environment variables are optional. If not set, the site will run with placeholder content where those features are used.
+
+### Smoke Test
+
+```bash
+curl -I $(gcloud run services describe tourrecap-website --region us-central1 --format='value(status.url)')
+```
+
+### View Logs
+
+```bash
+gcloud run services logs read tourrecap-website --region us-central1
+```
+
+### Delete Service (stop all costs)
+
+```bash
+gcloud run services delete tourrecap-website --region us-central1
+```
