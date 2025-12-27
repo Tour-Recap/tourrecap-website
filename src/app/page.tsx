@@ -67,7 +67,7 @@ export default function Home() {
       </section>
 
       {/* Deliverables Section */}
-      <section className="bg-white py-16">
+      <section id="deliverables" className="bg-white py-16">
         <div className="mx-auto max-w-6xl px-4">
           <div className="grid gap-8 md:grid-cols-2">
             <div className="rounded-lg border border-gray-200 p-6">
@@ -172,7 +172,7 @@ export default function Home() {
       </section>
 
       {/* How It Works Section */}
-      <section className="bg-white py-16">
+      <section id="how-it-works" className="bg-white py-16">
         <div className="mx-auto max-w-6xl px-4">
           <h2 className="text-center text-2xl font-bold text-foreground">How It Works</h2>
           <div className="mt-12 grid gap-8 md:grid-cols-4">
@@ -211,7 +211,7 @@ export default function Home() {
       </section>
 
       {/* Trust Strip Section */}
-      <section className="bg-gray-50 py-16">
+      <section id="trust" className="bg-gray-50 py-16">
         <div className="mx-auto max-w-6xl px-4 text-center">
           <h2 className="text-2xl font-bold text-foreground">Brand-safe by design</h2>
           <div className="mt-8 flex flex-col items-center justify-center gap-6 md:flex-row md:gap-12">
