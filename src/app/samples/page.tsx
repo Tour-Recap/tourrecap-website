@@ -1,7 +1,7 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 
 import { CtaStrip } from '@/components/ui/CtaStrip';
-import { SamplesHeroCta } from '@/components/ui/SamplesHeroCta';
 import { SectionHeading } from '@/components/ui/SectionHeading';
 
 export const metadata: Metadata = {
@@ -108,7 +108,20 @@ export default function SamplesPage() {
             Two deliverables every tour day: a Guest Daily Recap for each guest and a Tour Day
             Recap for the group — designed to be shared nightly.
           </p>
-          <SamplesHeroCta />
+          <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:justify-center">
+            <Link
+              href="/enterprise"
+              className="inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-base font-medium text-white transition-colors hover:bg-primary/90"
+            >
+              Request an Enterprise Pilot
+            </Link>
+            <Link
+              href="/basic-demo"
+              className="inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-6 py-3 text-base font-medium text-gray-700 transition-colors hover:bg-gray-50"
+            >
+              Start Basic Package Demo
+            </Link>
+          </div>
         </div>
       </section>
 

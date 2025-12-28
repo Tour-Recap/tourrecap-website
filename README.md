@@ -33,45 +33,17 @@ NEXT_PUBLIC_BASIC_DEMO_CALENDLY_URL=https://calendly.com/tourrecap/basic-demo
 NEXT_PUBLIC_SAMPLE_GUEST_URL=https://www.youtube.com/embed/xxxxx
 NEXT_PUBLIC_SAMPLE_TOUR_URL=https://www.youtube.com/embed/xxxxx
 NEXT_PUBLIC_SAMPLE_SEQUENCE_URL=https://www.youtube.com/embed/xxxxx
-NEXT_PUBLIC_PLAUSIBLE_DOMAIN=www.tourrecap.com
 ```
 
-| Variable                              | Description                                        |
-| ------------------------------------- | -------------------------------------------------- |
-| `NEXT_PUBLIC_FORMSPREE_ID`            | Formspree form ID for enterprise pilot requests    |
-| `NEXT_PUBLIC_BASIC_DEMO_CALENDLY_URL` | Calendly scheduling URL for basic demo bookings    |
-| `NEXT_PUBLIC_SAMPLE_GUEST_URL`        | Video URL for Guest Daily Recap sample             |
-| `NEXT_PUBLIC_SAMPLE_TOUR_URL`         | Video URL for Tour Day Recap sample                |
+| Variable                              | Description                                      |
+| ------------------------------------- | ------------------------------------------------ |
+| `NEXT_PUBLIC_FORMSPREE_ID`            | Formspree form ID for enterprise pilot requests  |
+| `NEXT_PUBLIC_BASIC_DEMO_CALENDLY_URL` | Calendly scheduling URL for basic demo bookings  |
+| `NEXT_PUBLIC_SAMPLE_GUEST_URL`        | Video URL for Guest Daily Recap sample           |
+| `NEXT_PUBLIC_SAMPLE_TOUR_URL`         | Video URL for Tour Day Recap sample              |
 | `NEXT_PUBLIC_SAMPLE_SEQUENCE_URL`     | Video URL for multi-day sequence sample (optional) |
-| `NEXT_PUBLIC_PLAUSIBLE_DOMAIN`        | Domain for Plausible analytics (optional)          |
 
 Get your Formspree ID from [formspree.io](https://formspree.io).
-
-## Analytics
-
-Analytics uses [Plausible](https://plausible.io) - a privacy-friendly, cookie-free analytics service.
-
-### Setup
-
-1. Create a site in your Plausible dashboard
-2. Set `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` to your domain (e.g., `www.tourrecap.com`)
-
-If the env var is not set, analytics is disabled (no-op).
-
-### Custom Events
-
-The following conversion events are tracked:
-
-| Event                    | Description                                | Location                        |
-| ------------------------ | ------------------------------------------ | ------------------------------- |
-| `cta_enterprise_pilot`   | Click on "Request Enterprise Pilot" button | Homepage, Samples page, CtaStrip |
-| `cta_basic_demo`         | Click on "Start Basic Demo" button         | Homepage, Samples page, CtaStrip |
-| `cta_view_samples`       | Click on "See Sample Recaps" link          | Enterprise page                 |
-| `enterprise_form_submit` | Successful enterprise form submission      | Enterprise page                 |
-
-### Verification
-
-After deploying, verify events in Plausible dashboard → Goals.
 
 ## Scripts
 
