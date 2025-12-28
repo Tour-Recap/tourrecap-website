@@ -15,11 +15,25 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'TourRecap',
+  metadataBase: new URL('https://www.tourrecap.com'),
+  title: {
+    default: 'TourRecap',
+    template: '%s | TourRecap',
+  },
   description: 'Nightly guest + tour recaps for tour operators.',
   openGraph: {
     title: 'TourRecap',
     description: 'Nightly guest + tour recaps for tour operators.',
+    siteName: 'TourRecap',
+    images: [{ url: '/og.png', width: 1200, height: 630, alt: 'TourRecap' }],
+    type: 'website',
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'TourRecap',
+    description: 'Nightly guest + tour recaps for tour operators.',
+    images: [{ url: '/og.png', width: 1200, height: 630, alt: 'TourRecap' }],
   },
 };
 

@@ -1,7 +1,13 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
 
 import { CtaStrip } from '@/components/ui/CtaStrip';
 import { SectionHeading } from '@/components/ui/SectionHeading';
+
+export const metadata: Metadata = {
+  title: 'Sample Recaps',
+  description: 'See sample Guest Daily Recaps and Tour Day Recaps from TourRecap.',
+};
 
 const SAMPLE_GUEST_URL = process.env.NEXT_PUBLIC_SAMPLE_GUEST_URL;
 const SAMPLE_TOUR_URL = process.env.NEXT_PUBLIC_SAMPLE_TOUR_URL;
