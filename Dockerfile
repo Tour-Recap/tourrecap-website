@@ -9,6 +9,10 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+
+# Build-time env vars for Next.js (NEXT_PUBLIC_* are baked into the bundle)
+ENV NEXT_PUBLIC_PLAUSIBLE_DOMAIN=www.tourrecap.com
+
 RUN npm run build
 
 # Stage 3: runner - production image with prod deps only
