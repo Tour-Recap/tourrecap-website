@@ -1,7 +1,9 @@
 'use client';
 
 import { useState, FormEvent } from 'react';
-import Link from 'next/link';
+
+import { TrackedLink } from '@/components/analytics/TrackedLink';
+import { track } from '@/lib/analytics';
 
 type FormState = 'idle' | 'loading' | 'success' | 'error';
 
@@ -46,6 +48,7 @@ export default function EnterprisePage() {
       });
       if (res.ok) {
         setFormState('success');
+        track('enterprise_form_submit');
       } else {
         setFormState('error');
       }
@@ -66,12 +69,14 @@ export default function EnterprisePage() {
             Standardize nightly Guest Daily Recaps + Tour Day Recaps across your departures —
             packaged for scale, predictable delivery, and brand control.
           </p>
-          <Link
+          <TrackedLink
             href="/samples"
+            trackEvent="cta_view_samples"
+            trackProps={{ location: 'enterprise_hero' }}
             className="mt-4 inline-block text-primary underline hover:text-primary/80"
           >
             See Sample Recaps
-          </Link>
+          </TrackedLink>
         </div>
       </section>
 
@@ -374,9 +379,14 @@ export default function EnterprisePage() {
         <div className="mx-auto max-w-6xl px-4 text-center">
           <p className="text-sm text-gray-500">
             Independent guide or small operator?{' '}
-            <Link href="/basic-demo" className="text-primary hover:underline">
+            <TrackedLink
+              href="/basic-demo"
+              trackEvent="cta_basic_demo"
+              trackProps={{ location: 'enterprise_footnote' }}
+              className="text-primary hover:underline"
+            >
               Start with the Basic Package Demo.
-            </Link>
+            </TrackedLink>
           </p>
         </div>
       </section>
