@@ -173,14 +173,16 @@ curl -I https://www.tourrecap.com
 curl -I http://www.tourrecap.com
 # Expected: HTTP/1.1 301, Location: https://www.tourrecap.com/
 
-# Check apex redirects to www (HTTP)
-curl -I http://tourrecap.com
-# Expected: 301, Location: https://www.tourrecap.com/
+# Check apex redirects to www (HTTP) - use GET, not HEAD
+curl -sS http://tourrecap.com -o /dev/null -D- | grep -iE 'HTTP/|location:'
+# Expected: HTTP/1.1 301, Location: https://www.tourrecap.com/
 
-# Check apex redirects to www (HTTPS)
-curl -I https://tourrecap.com
-# Expected: 301, Location: https://www.tourrecap.com/
+# Check apex redirects to www (HTTPS) - use GET, not HEAD
+curl -sS https://tourrecap.com -o /dev/null -D- | grep -iE 'HTTP/|location:'
+# Expected: HTTP/1.1 301, Location: https://www.tourrecap.com/
 ```
+
+**Note:** GoDaddy forwarding may return 405 for HEAD requests; use GET-based checks above.
 
 Or use the helper script:
 
