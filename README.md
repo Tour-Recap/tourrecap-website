@@ -117,3 +117,88 @@ gcloud run services logs read tourrecap-website --region us-east1
 ```bash
 gcloud run services delete tourrecap-website --region us-east1
 ```
+
+## Custom Domain Setup
+
+Map www.tourrecap.com to Cloud Run and redirect apex to www.
+
+### Step 1: Add Domain Mapping in Cloud Run
+
+```bash
+gcloud run domain-mappings create --service tourrecap-website --domain www.tourrecap.com --region us-east1
+```
+
+Get the required DNS records:
+
+```bash
+gcloud run domain-mappings describe --domain www.tourrecap.com --region us-east1
+```
+
+### Step 2: Configure DNS in GoDaddy
+
+**For www subdomain (CNAME):**
+
+| Type  | Name | Value                | TTL    |
+| ----- | ---- | -------------------- | ------ |
+| CNAME | www  | ghs.googlehosted.com | 1 hour |
+
+**For apex domain (tourrecap.com):**
+
+GoDaddy doesn't support CNAME at apex. Use domain forwarding:
+
+1. Go to GoDaddy Domain Settings → Forwarding
+2. Forward `tourrecap.com` to `https://www.tourrecap.com`
+3. Select: Permanent (301), Forward only
+
+### Step 3: Verify
+
+Wait 5-30 minutes for DNS propagation, then:
+
+```bash
+# Check CNAME record
+dig www.tourrecap.com CNAME +short
+# Expected: ghs.googlehosted.com.
+
+nslookup www.tourrecap.com
+# Expected: canonical name = ghs.googlehosted.com
+
+nslookup tourrecap.com
+# Expected: A record pointing to GoDaddy forwarding IP
+
+# Check HTTPS serves site
+curl -I https://www.tourrecap.com
+# Expected: HTTP/2 200
+
+# Check HTTP→HTTPS redirect
+curl -I http://www.tourrecap.com
+# Expected: HTTP/1.1 301, Location: https://www.tourrecap.com/
+
+# Check apex redirects to www (HTTP)
+curl -I http://tourrecap.com
+# Expected: 301, Location: https://www.tourrecap.com/
+
+# Check apex redirects to www (HTTPS)
+curl -I https://tourrecap.com
+# Expected: 301, Location: https://www.tourrecap.com/
+```
+
+Or use the helper script:
+
+```bash
+./ops/domain_check.sh
+./ops/domain_check.sh tourrecap.com  # check apex
+```
+
+### Troubleshooting
+
+| Issue                 | Fix                                                          |
+| --------------------- | ------------------------------------------------------------ |
+| Domain mapping fails  | Verify domain ownership in Google Search Console, then retry |
+| Certificate pending   | Wait up to 24h; ensure CNAME is correct                      |
+| DNS not resolving     | Check TTL; try `dig @8.8.8.8 www.tourrecap.com`              |
+| Wrong project         | Run `gcloud config set project tourrecap-web-dev`            |
+| 404 after mapping     | Verify service is deployed and running                       |
+
+### Cost Note
+
+This uses Cloud Run's built-in domain mapping (free). No load balancer required.
