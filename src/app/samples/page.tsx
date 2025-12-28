@@ -1,5 +1,8 @@
 import Link from 'next/link';
 
+import { CtaStrip } from '@/components/ui/CtaStrip';
+import { SectionHeading } from '@/components/ui/SectionHeading';
+
 const SAMPLE_GUEST_URL = process.env.NEXT_PUBLIC_SAMPLE_GUEST_URL;
 const SAMPLE_TOUR_URL = process.env.NEXT_PUBLIC_SAMPLE_TOUR_URL;
 const SAMPLE_SEQUENCE_URL = process.env.NEXT_PUBLIC_SAMPLE_SEQUENCE_URL;
@@ -148,7 +151,7 @@ export default function SamplesPage() {
       {/* What to Look For */}
       <section className="bg-white py-16">
         <div className="mx-auto max-w-6xl px-4">
-          <h2 className="text-center text-2xl font-bold text-foreground">What to Look For</h2>
+          <SectionHeading title="What to Look For" className="text-center" />
           <div className="mx-auto mt-10 max-w-2xl">
             <ul className="space-y-4">
               <li className="flex items-start gap-3">
@@ -183,28 +186,20 @@ export default function SamplesPage() {
       {/* Segment Routing Strip */}
       <section className="bg-gray-50 py-16">
         <div className="mx-auto max-w-6xl px-4">
-          <div className="grid gap-8 md:grid-cols-2">
-            <div className="rounded-lg border border-gray-200 bg-white p-8 text-center">
-              <p className="text-lg font-medium text-foreground">Tour operator team?</p>
-              <Link
-                href="/enterprise"
-                className="mt-4 inline-flex items-center justify-center rounded-md bg-primary px-6 py-3 text-base font-medium text-white transition-colors hover:bg-primary/90"
-              >
-                Request an Enterprise Pilot
-              </Link>
-            </div>
-            <div className="rounded-lg border border-gray-200 bg-white p-8 text-center">
-              <p className="text-lg font-medium text-foreground">
-                Independent guide / small operator?
-              </p>
-              <Link
-                href="/basic-demo"
-                className="mt-4 inline-flex items-center justify-center rounded-md border border-gray-300 bg-white px-6 py-3 text-base font-medium text-gray-700 transition-colors hover:bg-gray-50"
-              >
-                Start Basic Package Demo
-              </Link>
-            </div>
-          </div>
+          <CtaStrip
+            primary={{
+              heading: 'Tour operator team?',
+              description: 'Standardize recaps across your departures with enterprise controls.',
+              buttonText: 'Request an Enterprise Pilot',
+              href: '/enterprise',
+            }}
+            secondary={{
+              heading: 'Independent guide / small operator?',
+              description: 'Get started with a simple demo to see TourRecap in action.',
+              buttonText: 'Start Basic Demo',
+              href: '/basic-demo',
+            }}
+          />
         </div>
       </section>
     </>
