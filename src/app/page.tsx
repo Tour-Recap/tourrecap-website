@@ -1,9 +1,16 @@
+import { Metadata } from 'next';
 import Link from 'next/link';
 
-import { SectionHeading } from '@/components/ui/SectionHeading';
-import { FeatureCard } from '@/components/ui/FeatureCard';
-import { DeviceMock } from '@/components/ui/DeviceMock';
 import { CtaStrip } from '@/components/ui/CtaStrip';
+import { DeviceMock } from '@/components/ui/DeviceMock';
+import { FeatureCard } from '@/components/ui/FeatureCard';
+import { SectionHeading } from '@/components/ui/SectionHeading';
+
+export const metadata: Metadata = {
+  title: 'Daily Recaps Your Guests Share',
+  description:
+    'TourRecap delivers Guest Daily Recaps and Tour Day Recaps — generated nightly, branded, ready to share.',
+};
 
 export default function Home() {
   return (
